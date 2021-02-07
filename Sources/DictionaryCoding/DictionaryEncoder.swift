@@ -31,6 +31,9 @@ open class DictionaryEncoder {
 
     /// The strategy to use for encoding `Date` values.
     public enum DateEncodingStrategy {
+        
+        case asIs
+        
         /// Defer to `Date` for choosing an encoding. This is the default strategy.
         case deferredToDate
 
@@ -55,6 +58,8 @@ open class DictionaryEncoder {
 
     /// The strategy to use for encoding `Data` values.
     public enum DataEncodingStrategy {
+        
+        case asIs
         /// Defer to `Data` for choosing an encoding.
         case deferredToData
 
@@ -754,6 +759,8 @@ extension _DictionaryEncoder {
 
             // We can pop because the closure encoded something.
             return self.storage.popContainer()
+        case .asIs:
+            return date as NSDate
         }
     }
 
@@ -799,6 +806,8 @@ extension _DictionaryEncoder {
 
             // We can pop because the closure encoded something.
             return self.storage.popContainer()
+        case .asIs:
+            return data as NSData
         }
     }
 
